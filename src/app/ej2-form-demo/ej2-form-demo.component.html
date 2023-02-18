@@ -1,34 +1,64 @@
-<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-    <div class="form-group vertical">
-      <div class="row">
-        <div class="col-6">
-          <label for="category">Coding post: </label>
-          <ejs-dropdownlist [dataSource]="codeDataSource | async" [fields]="fields" formControlName="code"
-            placeholder="Select your Coding's post..." [allowFiltering]='true' (filtering)='onFiltering($event)'>
-          </ejs-dropdownlist>
+<div class="row">
+  <div class="col-12 container">
+
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <div class="form-group vertical">
+        <div class="row">
+          <div class="col-6">
+            <label for="cat">Category: </label>
+            <ejs-dropdownlist [dataSource]="catDataSource" [fields]="catFields" formControlName="cat"
+              showClearButton="true" placeholder="Select category..." [allowFiltering]='true'
+              (filtering)="onCatFiltering($event)">
+            </ejs-dropdownlist>
+          </div>
+
+          <div class="col-6">
+            <label for="art">Post: </label>
+            <ejs-dropdownlist [dataSource]="artDataSource" [fields]="artFields" formControlName="art"
+              showClearButton="true" placeholder="Select post..." [allowFiltering]='true'
+              (filtering)="onArtFiltering($event)">
+            </ejs-dropdownlist>
+          </div>
+
+
         </div>
-  
-        <div class="col-6">
-          <label for="category">Photography post: </label>
-          <ejs-dropdownlist [dataSource]="artDataSource | async" [fields]="fields" formControlName="art"
-            placeholder="Select your Art's post..." [allowFiltering]='true' (filtering)='onFiltering($event)'>
-          </ejs-dropdownlist>
+
+        <div class="row">
+          <div class="col-3 submit">
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </div>
         </div>
-  
-  
+
+        <div class="row">
+          <div class="col-12">
+            {{ formSubmitValue }}
+          </div>
+        </div>
+
       </div>
-  
-      <div class="row">
-        <div class="col-3">
-          <button class="btn btn-primary" type="submit">Submit</button>
-        </div>
+    </form>
+
+    <div class="row mt-20">
+      <div class="col-3">
+        <button class="btn btn-secondary" (click)="initFormValue()">Set initial values</button>
       </div>
-  
-      <div class="row">
-        <div class="col-12">
-          {{ formSubmitValue }}
-        </div>
+      <div class="col-3">
+        <button class="btn btn-secondary" (click)="showArtDataSource()">Show artDataSource</button>
       </div>
-  
     </div>
-  </form>
+
+    <div class="row mt-20">
+      <div class="col-12" *ngIf="working">
+        Working...
+      </div>
+    </div>
+
+    <div class="row mt-20">
+      <div class="col-12" *ngIf="message">
+        {{ message }}
+      </div>
+    </div>
+
+  </div>
+
+</div>
