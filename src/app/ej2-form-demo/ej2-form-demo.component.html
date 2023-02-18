@@ -1,0 +1,34 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div class="form-group vertical">
+      <div class="row">
+        <div class="col-6">
+          <label for="category">Coding post: </label>
+          <ejs-dropdownlist [dataSource]="codeDataSource | async" [fields]="fields" formControlName="code"
+            placeholder="Select your Coding's post..." [allowFiltering]='true' (filtering)='onFiltering($event)'>
+          </ejs-dropdownlist>
+        </div>
+  
+        <div class="col-6">
+          <label for="category">Photography post: </label>
+          <ejs-dropdownlist [dataSource]="artDataSource | async" [fields]="fields" formControlName="art"
+            placeholder="Select your Art's post..." [allowFiltering]='true' (filtering)='onFiltering($event)'>
+          </ejs-dropdownlist>
+        </div>
+  
+  
+      </div>
+  
+      <div class="row">
+        <div class="col-3">
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-12">
+          {{ formSubmitValue }}
+        </div>
+      </div>
+  
+    </div>
+  </form>
