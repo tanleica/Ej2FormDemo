@@ -4,19 +4,21 @@
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
       <div class="form-group vertical">
         <div class="row">
-          <div class="col-6">
+          <div class="col-sm-6">
             <label for="cat">Category: </label>
             <ejs-dropdownlist [dataSource]="catDataSource" [fields]="catFields" formControlName="cat"
-              showClearButton="true" placeholder="Select category..." [allowFiltering]='true'
-              (filtering)="onCatFiltering($event)">
+              showClearButton="true" [placeholder]="working1 ? 'Loading...' :  'Select category...'" [allowFiltering]='true'
+              (filtering)="onCatFiltering($event)"
+              [enabled]="!working1">
             </ejs-dropdownlist>
           </div>
 
-          <div class="col-6">
+          <div class="col-sm-6">
             <label for="art">Post: </label>
             <ejs-dropdownlist [dataSource]="artDataSource" [fields]="artFields" formControlName="art"
-              showClearButton="true" placeholder="Select post..." [allowFiltering]='true'
-              (filtering)="onArtFiltering($event)">
+              showClearButton="true" [placeholder]="working2 ? 'Loading...' : 'Select post...'" [allowFiltering]='true'
+              (filtering)="onArtFiltering($event)"
+              [enabled]="!working2">
             </ejs-dropdownlist>
           </div>
 
@@ -24,8 +26,9 @@
         </div>
 
         <div class="row">
-          <div class="col-3 submit">
+          <div class="col-6 submit">
             <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-danger" type="button" (click)="resetForm()">Reset</button>
           </div>
         </div>
 
@@ -39,17 +42,17 @@
     </form>
 
     <div class="row mt-20">
-      <div class="col-3">
-        <button class="btn btn-secondary" (click)="initFormValue()">Set initial values</button>
+      <div class="col-6">
+        <button *ngIf="!!!formGroup.get('art')!.value" class="btn btn-secondary" (click)="initFormValue()">Set form value first, then update Post data source</button>
       </div>
-      <div class="col-3">
-        <button class="btn btn-secondary" (click)="showArtDataSource()">Show artDataSource</button>
+      <div class="col-6">
+        <button *ngIf="!!!formGroup.get('art')!.value" class="btn btn-secondary" (click)="initFormValueAfterThe2ndDropdownListDataSourceIsReady()">Set form value after Post data source is ready</button>
       </div>
     </div>
 
     <div class="row mt-20">
       <div class="col-12" *ngIf="working">
-        Working...
+        Simulating a getById Api call...
       </div>
     </div>
 
